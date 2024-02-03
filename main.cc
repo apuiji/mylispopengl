@@ -32,7 +32,7 @@ namespace zlt::mylisp::opengl {
     double width;
     double height;
     wstring_view title;
-    if (!dynamicast(make_tuple(&width, &height, &title), it, end)) {
+    if (!dynamicasts(make_tuple(&width, &height, &title), it, end)) {
       return Null();
     }
   }
