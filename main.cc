@@ -26,7 +26,7 @@ namespace zlt::mylisp::opengl {
 
   inline int exp0rt(Value &dest) {
     MapObj::StrPool sp;
-    sp[*constring<'o', 'p', 'e', 'n', 'W', 'i', 'n', 'd', 'o', 'w'>] = openWindow;
+    sp[constring<'o', 'p', 'e', 'n', 'W', 'i', 'n', 'd', 'o', 'w'>] = openWindow;
     MapObj *mod = neobj<MapObj>();
     mod->strPool = std::move(sp);
     dest = mod;
