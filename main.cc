@@ -1,39 +1,36 @@
-#include<GL/glew.h>
-#include<GLFW/glfw3.h>
 #include<GL/gl.h>
+#include<GLFW/glfw3.h>
 #include<glm/glm.hpp>
 #include"mylisp/iconvs.hh"
+#include"mylisp/maps.hh"
 
 using namespace std;
 
 namespace zlt::mylisp::opengl {
-  static inline Value exp0rt() {
-    ;
-  }
+  inline int exp0rt(Value &dest);
 }
 
-extern "c" {
-  Value mylispExport() {
-    return zlt::mylisp::opengl::exp0rt();
+extern "C" {
+  int mylispExport(zlt::mylisp::Value &dest) {
+    return zlt::mylisp::opengl::exp0rt(dest);
   }
 }
 
 namespace zlt::mylisp::opengl {
   struct WindowObj final: Object {
     GLFWwindow *value;
-    WindowObj(GLFwindow *value) noexcept: value(value) {}
+    WindowObj(GLFWwindow *value) noexcept: value(value) {}
   };
 
   static NativeFunction openWindow;
-  static NativeFunction closeWindow;
 
-  inline Value exp0rt() {
+  inline int exp0rt(Value &dest) {
     MapObj::StrPool sp;
-    sp[constring<'o', 'p', 'e', 'n', 'W', 'i', 'n', 'd', 'o', 'w'>] = openWindow;
-    sp[constring<'c', 'l', 'o', 's', 'e', 'W', 'i', 'n', 'd', 'o', 'w'>] = closeWindow;
+    sp[*constring<'o', 'p', 'e', 'n', 'W', 'i', 'n', 'd', 'o', 'w'>] = openWindow;
     MapObj *mod = neobj<MapObj>();
     mod->strPool = std::move(sp);
-    return mod;
+    dest = mod;
+    return 0;
   }
 
   Value openWindow(const Value *it, const Value *end) {
