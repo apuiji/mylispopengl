@@ -1,5 +1,8 @@
-opengl.so: ../main.cc
-	clang++ -o $@ $^ -I ../.. -std=c++2b -fPIC -shared -g
+opengl.so: main.o
+	clang++ -o $@ $^ -lGL -shared -g
+
+%.o: ../%.cc
+	clang++ -o $@ $< -I ../.. -std=c++2b -fPIC -c -g
 
 clean:
 	touch opengl.so
