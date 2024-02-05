@@ -1,7 +1,6 @@
 #include<GL/gl.h>
 #include<GLFW/glfw3.h>
 #include<glm/glm.hpp>
-#include"mylisp/iconvs.hh"
 #include"mylisp/maps.hh"
 
 using namespace std;
@@ -36,15 +35,11 @@ namespace zlt::mylisp::opengl {
   Value openWindow(const Value *it, const Value *end) {
     int width;
     int height;
-    wstring_view title;
+    string_view title;
     if (!dynamicasts(make_tuple(&width, &height, &title), it, end)) [[unlikely]] {
       return Null();
     }
-    string title1;
-    if (!strconv(title1, title)) {
-      title1 = "";
-    }
-    auto window = glfwCreateWindow(width, height, title1.data(), nullptr, nullptr);
+    auto window = glfwCreateWindow(width, height, title.data(), nullptr, nullptr);
     if (!window) {
       return Null();
     }
