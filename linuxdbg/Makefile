@@ -6,6 +6,6 @@ opengl.so: main.o
 
 clean:
 	touch opengl.so
-	rm opengl.so
+	rm opengl.so *.o
 
 .PHONY: clean

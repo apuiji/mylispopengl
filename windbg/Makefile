@@ -6,6 +6,6 @@ opengl.so: main.o
 
 clean:
 	echo > opengl.so
-	del opengl.so
+	del opengl.so *.o
 
 .PHONY: clean
